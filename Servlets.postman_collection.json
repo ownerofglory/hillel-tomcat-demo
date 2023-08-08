@@ -1,0 +1,111 @@
+{
+	"info": {
+		"_postman_id": "01c06082-e181-4aaa-bd01-ad57847fe3ee",
+		"name": "Servlets",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get names",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/hillel-hello/name",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"hillel-hello",
+						"name"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add name",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "Alice"
+				},
+				"url": {
+					"raw": "http://localhost:8080/hillel-hello/name",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"hillel-hello",
+						"name"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete name",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/hillel-hello/name/:name",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"hillel-hello",
+						"name",
+						":name"
+					],
+					"variable": [
+						{
+							"key": "name",
+							"value": "Alice"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete name Copy",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "alice"
+				},
+				"url": {
+					"raw": "http://localhost:8080/hillel-hello/name/:name",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"hillel-hello",
+						"name",
+						":name"
+					],
+					"variable": [
+						{
+							"key": "name",
+							"value": "Alice"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
