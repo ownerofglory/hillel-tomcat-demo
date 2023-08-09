@@ -19,3 +19,36 @@ ua.ithillel.tomcat
     └── web               # Web UI classes: Servlets
 
 ```
+
+### Build, deploy, run
+
+#### Prerequisites
+ - JDK v17
+ - Tomcat v10.X
+ - Maven
+
+#### Maven Build
+```mvn
+  mvn clean package
+```
+#### Deploy artifact
+
+ Move maven artifact `hillel-tomcat-demo-{VERSION}.war` from `target` into `webapp` directory of Tomcat
+
+OR
+
+Use Smart Tomcat Plugin
+- Install `IntelliJ Idea > Preferences > Plugins`, search for `Smart Tomcat`
+- Once installed you can create a start configuration
+![](./assets/start-config.png)
+
+Choose `Smart Tomcat`
+![](./assets/choose-start-config.png)
+
+Create start config and save it
+![](./assets/create-start-config.png)
+
+Hit play button to deploy and start the app on Tomcat
+
+The app is now available via [http://localhost:8080/hillel-hello](http://localhost:8080/hillel-hello)
+
