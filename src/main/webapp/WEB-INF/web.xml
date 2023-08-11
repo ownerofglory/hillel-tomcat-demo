@@ -5,6 +5,11 @@
          version="6.0"
          metadata-complete="true">
 
+    <context-param>
+        <param-name>db-file</param-name>
+        <param-value>/meal-app.db</param-value>
+    </context-param>
+
     <servlet>
         <servlet-name>HelloServlet</servlet-name>
         <servlet-class>ua.ithillel.tomcat.web.HelloServlet</servlet-class>
@@ -29,6 +34,41 @@
         <servlet-name>NameServlet</servlet-name>
         <url-pattern>/name/*</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>IndexPage</servlet-name>
+        <jsp-file>/WEB-INF/index.jsp</jsp-file>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>IndexPage</servlet-name>
+        <url-pattern>/index.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>MealPage</servlet-name>
+        <jsp-file>/WEB-INF/meals.jsp</jsp-file>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>MealPage</servlet-name>
+        <url-pattern>/meals.jsp</url-pattern>
+    </servlet-mapping>
+
+    <error-page>
+        <location>/WEB-INF/notfound.jsp</location>
+        <error-code>404</error-code>
+    </error-page>
+
+    <servlet>
+        <servlet-name>RecipePage</servlet-name>
+        <jsp-file>/WEB-INF/recipe.jsp</jsp-file>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>RecipePage</servlet-name>
+        <url-pattern>/recipe.jsp</url-pattern>
+    </servlet-mapping>
 
 
 <!--    <servlet>-->
@@ -46,5 +86,14 @@
         <listener-class>ua.ithillel.tomcat.web.AppContextListener</listener-class>
     </listener>
 
+    <filter>
+        <filter-name>LoggingFilter</filter-name>
+        <filter-class>ua.ithillel.tomcat.web.filter.LoggingFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>LoggingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 
 </web-app>

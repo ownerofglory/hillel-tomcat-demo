@@ -3,16 +3,16 @@ package ua.ithillel.tomcat.web;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.ServletContextEvent;
 import jakarta.servlet.ServletContextListener;
-import jakarta.servlet.ServletRegistration;
 import ua.ithillel.tomcat.client.MealClient;
 import ua.ithillel.tomcat.client.TheMealDbClient;
 import ua.ithillel.tomcat.dao.FavouriteMealDao;
 import ua.ithillel.tomcat.dao.FavouriteMealJdbcDao;
 import ua.ithillel.tomcat.db.DbSchemaInitializer;
 import ua.ithillel.tomcat.exception.DbInitException;
+import ua.ithillel.tomcat.model.mapper.AreaMapperDefault;
+import ua.ithillel.tomcat.model.mapper.CategoriesMapperDefault;
 import ua.ithillel.tomcat.model.mapper.MealMapperDefault;
-import ua.ithillel.tomcat.service.MealSearchService;
-import ua.ithillel.tomcat.service.MealSearchServiceDefault;
+import ua.ithillel.tomcat.service.*;
 
 import java.net.http.HttpClient;
 import java.sql.Connection;
@@ -26,19 +26,12 @@ public class AppContextListener implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         try {
-            String sqliteConnStringEnv = System.getenv("SQLITE_CONN_STRING");
-            String sqliteConnString = sqliteConnStringEnv != null
-                    ? sqliteConnStringEnv : System.getProperty("sqliteConnString");
-
-            if (sqliteConnString == null) {
-                sqliteConnString = "jdbc:sqlite:meal-app.db";
-            }
-
-            System.out.println("Connection string: " + sqliteConnString);
-
             Class.forName("org.sqlite.JDBC");
-            connection = DriverManager.getConnection(sqliteConnString);
 
+            String dbFilePath = sce.getServletContext().getInitParameter("db-file");
+            String dbPath = getClass().getResource(dbFilePath).getPath();
+
+            connection = DriverManager.getConnection("jdbc:sqlite:" + dbPath);
             // init DB schema
             DbSchemaInitializer.init(connection, "sqlite-schema.sql");
 
@@ -48,8 +41,10 @@ public class AppContextListener implements ServletContextListener {
             MealClient mealClient = new TheMealDbClient(HttpClient.newHttpClient(), new ObjectMapper());
             // create services
             MealSearchService mealSearchService = new MealSearchServiceDefault(mealClient, new MealMapperDefault(), favouriteMealDao);
+            CategoryService categoryService = new CategoriesServiceDefault(mealClient, new CategoriesMapperDefault());
+            AreaService areaService = new AreaServiceDefault(mealClient, new AreaMapperDefault());
 
-            MealAppServlet mealAppServlet = new MealAppServlet(mealSearchService);
+            MealAppServlet mealAppServlet = new MealAppServlet(mealSearchService, categoryService, areaService);
 
 
 
@@ -67,6 +62,12 @@ public class AppContextListener implements ServletContextListener {
 
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
-        ServletContextListener.super.contextDestroyed(sce);
+        try {
+            if (connection != null) {
+                connection.close();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
