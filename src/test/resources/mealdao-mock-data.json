@@ -1,0 +1,41 @@
+[
+  {
+    "id": 1000,
+    "name": "test name",
+    "recipe": "tes recipe",
+    "videoUrl": "https://video.com/1",
+    "theMealDbId": "2000",
+    "ingredients": [
+      {
+        "id": 5000,
+        "name": "test ingredient 1",
+        "measure": "test measure 1"
+      },
+      {
+        "id": 5001,
+        "name": "test ingredient 2",
+        "measure": "test measure 2"
+      }
+    ]
+  },
+  {
+    "id": 1001,
+    "name": "test name 1",
+    "recipe": "test recipe 1",
+    "videoUrl": "https://video.com/2",
+    "theMealDbId": "2001",
+    "ingredients": [
+      {
+        "id": 5000,
+        "name": "test ingredient 1",
+        "measure": "test measure 1"
+      },
+      {
+        "id": 5001,
+        "name": "test ingredient 2",
+        "measure": "test measure 2"
+      }
+    ]
+  }
+]
+
