@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Hillel Meal App :: Not Found</title>
+    <title>Hillel Meal App :: Internal Server Error</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 
     <style>
@@ -45,9 +45,9 @@
 
     <div class="outer">
         <div class="inner">
-            <h1>404</h1>
-            <h2>Not Found</h2>
-            <p>Resource you're requested can't be found</p>
+            <h1>500</h1>
+            <h2>Internal Server Error</h2>
+            <p>Something went wrong on our side. We're working on it</p>
         </div>
     </div>
 

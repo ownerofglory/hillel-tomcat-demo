@@ -19,10 +19,10 @@
             display: flex;
             flex-direction: row;
             flex-wrap: wrap;
+            justify-content: center;
         }
 
         .flex-container .card {
-            padding: 10px;
             margin: 20px;
         }
 
@@ -33,6 +33,12 @@
 
         .dropdown-container .dropdown {
             margin: 20px;
+            margin-left: 8vw;
+        }
+
+        .dropdown ul {
+            max-height: 60vh;
+            overflow-y: scroll;
         }
     </style>
 </head>
@@ -65,7 +71,7 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-8">
                 <div class="dropdown-container">
                     <div class="dropdown">
                         <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">

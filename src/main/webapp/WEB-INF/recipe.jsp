@@ -22,6 +22,20 @@
         .meal-img {
             max-height: 30vh;
         }
+
+        .list-container {
+            padding: 20px;
+            padding-left: 10px;
+        }
+
+        .meal-column {
+            padding: 10px;
+        }
+
+        .long-text {
+            padding: 10px;
+            margin-top: 20px
+        }
     </style>
 </head>
 <body>
@@ -47,19 +61,19 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-3 meal-column">
                 <h1><%= meal.getName() %></h1>
                 <img class="meal-img" src="<%= meal.getImageUrl() %>" alt="<%= meal.getName() %>">
             </div>
             <div class="col-md-9">
-                <p>
+                <p class="long-text">
                     <%= meal.getRecipe() %>
                 </p>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-6">
-                <div class="list-group">
+            <div class="col-md-6 list-container">
+                <div class="list-group ">
                     <%
                         List<IngredientVm> ingredientVms = meal.getIngredientVms();
                     %>
