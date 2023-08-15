@@ -19,6 +19,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Map;
+import java.util.Objects;
 
 public class AppContextListener implements ServletContextListener {
     private Connection connection;
@@ -29,7 +30,7 @@ public class AppContextListener implements ServletContextListener {
             Class.forName("org.sqlite.JDBC");
 
             String dbFilePath = sce.getServletContext().getInitParameter("db-file");
-            String dbPath = getClass().getResource(dbFilePath).getPath();
+            String dbPath = Objects.requireNonNull(getClass().getResource(dbFilePath)).getPath();
 
             connection = DriverManager.getConnection("jdbc:sqlite:" + dbPath);
             // init DB schema
@@ -45,10 +46,10 @@ public class AppContextListener implements ServletContextListener {
             AreaService areaService = new AreaServiceDefault(mealClient, new AreaMapperDefault());
 
             MealAppServlet mealAppServlet = new MealAppServlet(mealSearchService, categoryService, areaService);
-
-
-
             sce.getServletContext().addServlet("MealAppServlet", mealAppServlet).addMapping("/meal");
+
+            FavouriteMealServlet favouriteMealServlet = new FavouriteMealServlet(mealSearchService);
+            sce.getServletContext().addServlet("FavouriteMealServlet", favouriteMealServlet).addMapping("/favourite");
 
             System.out.println();
         } catch (SQLException e) {
